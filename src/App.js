@@ -1,65 +1,66 @@
+import React from 'react';
 import { useState } from 'react';
 import './App.css';
-import Titulo from './componentes/titulo';
-import Boton from './componentes/boton';
-import Pantalla from './componentes/pantalla';
-import BotonClear from './componentes/boton-clear';
+import Title from './Components/title';
+import Button from './Components/button';
+import Screen from './Components/screen';
+import ClearButton from './Components/clear-button';
 import { evaluate } from 'mathjs';
 
 function App() {
 
 const [input, setInput] = useState('');
 
-const agregarInput= val => {
-  setInput(input + val);
+const addInput= val => {
+  setInput(input => input + val);
 };
 
-const calcularResultado = () => {
+const calculateResult = () => {
   if (input !== "" && (input.startsWith("undefined") === false) && 
       (input.startsWith("+") === false) && (input.startsWith("*") === false) 
       && (input.startsWith("/") === false)) {
     setInput(evaluate(input));
      }  else {
       setInput("");
-      alert("Números primero por favor.");
+      alert("Clic on a number first, please.");
 };
 };
 
   return (
-    <><div className='div-titulo'>
-      <Titulo className='titulo-contenedor' />
+    <><div className='div-title'>
+      <Title className='title-container' />
     </div>
     <div className="App">
-        <div className='contenedor-calculadora'>
-          <Pantalla input={input} />
-          <div className='fila'>
-            <Boton manejarClic={agregarInput}>1</Boton>
-            <Boton manejarClic={agregarInput}>2</Boton>
-            <Boton manejarClic={agregarInput}>3</Boton>
-            <Boton manejarClic={agregarInput}>+</Boton>
+        <div className='calculator-container'>
+          <Screen input={input} />
+          <div className='row'>
+            <Button doClic={addInput}>1</Button>
+            <Button doClic={addInput}>2</Button>
+            <Button doClic={addInput}>3</Button>
+            <Button doClic={addInput}>+</Button>
           </div>
-          <div className='fila'>
-            <Boton manejarClic={agregarInput}>4</Boton>
-            <Boton manejarClic={agregarInput}>5</Boton>
-            <Boton manejarClic={agregarInput}>6</Boton>
-            <Boton manejarClic={agregarInput}>-</Boton>
+          <div className='row'>
+            <Button doClic={addInput}>4</Button>
+            <Button doClic={addInput}>5</Button>
+            <Button doClic={addInput}>6</Button>
+            <Button doClic={addInput}>-</Button>
           </div>
-          <div className='fila'>
-            <Boton manejarClic={agregarInput}>7</Boton>
-            <Boton manejarClic={agregarInput}>8</Boton>
-            <Boton manejarClic={agregarInput}>9</Boton>
-            <Boton manejarClic={agregarInput}>*</Boton>
+          <div className='row'>
+            <Button doClic={addInput}>7</Button>
+            <Button doClic={addInput}>8</Button>
+            <Button doClic={addInput}>9</Button>
+            <Button doClic={addInput}>*</Button>
           </div>
-          <div className='fila'>
-            <Boton manejarClic={calcularResultado}>=</Boton>
-            <Boton manejarClic={agregarInput}>0</Boton>
-            <Boton manejarClic={agregarInput}>.</Boton>
-            <Boton manejarClic={agregarInput}>/</Boton>
+          <div className='row'>
+            <Button doClic={calculateResult}>=</Button>
+            <Button doClic={addInput}>0</Button>
+            <Button doClic={addInput}>.</Button>
+            <Button doClic={addInput}>/</Button>
           </div>
-          <div className='fila'>
-            <BotonClear manejarClear={() => setInput("")}>
+          <div className='row'>
+            <ClearButton doClic={() => setInput("")}>
               Clear
-            </BotonClear>
+            </ClearButton>
           </div>
         </div>
       </div></>
